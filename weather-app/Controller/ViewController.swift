@@ -35,10 +35,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
     
     //variables
     weak var tableView : UITableView!
+    weak var collectionview : UICollectionView!
     var latitude  = "51.044270"
     var longtitude = "-114.062019"
     var tableIsCreated = false
     var weeklyWeather : [[String : AnyObject]]!
+    var hourlyWeather : Dictionary<String, AnyObject>!
     
     
     override func viewDidLoad() {
@@ -86,8 +88,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
             customizeTable()
         }
         
-        
     }
+    
     func customizeTable(){
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +105,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         self.tableView.allowsSelection = false
         self.tableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "weakDayCell")
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Conditon")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ConditonCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "hourlyCell")
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -133,7 +137,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         
         guard let json = response.result.value as? Dictionary<String, AnyObject> else {return}
         let currentWeather = json["currently"] as! [String : AnyObject]
-        let hourlyWeather = json["hourly"] as! Dictionary<String, AnyObject>
+        self.hourlyWeather = (json["hourly"] as! Dictionary<String, AnyObject>)
         let weather = json["daily"] as! Dictionary<String, AnyObject>
         let weeklyWeather = weather["data"] as! [[String : AnyObject]]
         //print(weeklyWeather)
@@ -146,7 +150,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         let temperature = currentWeather["temperature"] as! NSNumber
         self.degreeLblText.text = String(describing: Int(round(temperature.floatValue))) + "°"
         self.precipTypeLblText.text = String(describing:currentWeather["summary"]!)
-        self.summaryLblText.text = String(describing: hourlyWeather["summary"]!)
+        self.summaryLblText.text = String(describing: self.hourlyWeather["summary"]!)
         self.apparentTemperatureHighLblText.text = String(describing: Int(round((dayOne["temperatureHigh"] as! NSNumber).floatValue))) + "°"
         self.apparentTemperatureLowLblText.text = String(describing: Int(round((dayOne["temperatureLow"] as! NSNumber).floatValue))) + "°"
         self.windSpeedLblText.text = String(describing:currentWeather["windSpeed"]!)
@@ -247,19 +251,15 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // let day = weeklyWeather![indexPath.row]
-        print("Im inside tableView indexPath.item is \(indexPath.item)")
         var count = 0
         
         if  indexPath.item != 8  {
-            print("258")
             for day in weeklyWeather{
                 if count == indexPath.item  {
-                    print("count is \(count)")
                     let cell = WeekDayCellTableViewCell(style:  UITableViewCell.CellStyle.default, reuseIdentifier: "weakDayCell")
                     var week = weaklyWeather()
                     week.highTemp = String(describing:Int(round((day["temperatureHigh"] as! NSNumber).floatValue))) + "°"
@@ -267,7 +267,6 @@ extension ViewController: UITableViewDataSource {
                     week.weatherCondition = WeatherCondition.init(rawValue: day["icon"] as! String)!
                     week.weekDay =  self.getDayOfWeek( self.createDateTime(timestamp: String(describing: day["time"]!)))!
                     cell.configureCell(day: week)
-                    print("---------")
                     return cell
                 }
                 count = count + 1
@@ -275,11 +274,15 @@ extension ViewController: UITableViewDataSource {
         }
         
         if indexPath.item == 8{
-            let cell2= TodayWeatherDescriptionCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Conditon")
+            let cell2 = TodayWeatherDescriptionCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "ConditonCell")
+            cell2.configureCell(lbl:String(describing: hourlyWeather!["summary"]!))
             
-            cell2.textLabel?.text = "kkkkkkkkkkkkkkk"
-            print("---------")
             return cell2
+        }
+        if indexPath.item == 9{
+            let cell3 = hourlyWeatherCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "hourlyCell")
+           // cell3.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+            return cell3
         }
         return UITableViewCell()
     }
