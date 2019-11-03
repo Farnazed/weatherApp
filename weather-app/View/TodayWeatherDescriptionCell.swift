@@ -53,6 +53,7 @@ class TodayWeatherDescriptionCell: UITableViewCell {
         NSLayoutConstraint(item: day!, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1.0, constant: 0.0).isActive = true
         NSLayoutConstraint(item: day!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
         NSLayoutConstraint(item: day!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0).isActive = true
+        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     }
     
 }

@@ -11,12 +11,15 @@ import Alamofire
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewDelegate{
+class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate{
+    
     
     let locationManager = CLLocationManager()
+    private let itemsPerRow: CGFloat = 3
     
     @IBOutlet weak var currentWeatherStack: UIStackView!
     @IBOutlet weak var todayWeatherDescriptionStack: UIStackView!
+    
     
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayLblText: UILabel!
@@ -30,12 +33,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
     @IBOutlet weak var uvIndexLblText: UILabel!
     @IBOutlet weak var weakWeatherView: UIView!
     @IBOutlet weak var hightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var hourlyWeatherCollectionView: UICollectionView!
     // TODO put the week data
     // let week : [Int:[String]] = []
     
     //variables
     weak var tableView : UITableView!
-    weak var collectionview : UICollectionView!
+
     var latitude  = "51.044270"
     var longtitude = "-114.062019"
     var tableIsCreated = false
@@ -45,6 +50,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hourlyWeatherCollectionView.dataSource = self
+        hourlyWeatherCollectionView.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled(){
@@ -80,7 +87,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         self.weakWeatherView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, animations: {
-            self.hightConstraint.constant = 260.0
+            self.hightConstraint.constant = 220.0
             self.view.layoutIfNeeded()
         })
         if !tableIsCreated{
@@ -106,8 +113,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         self.tableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "weakDayCell")
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ConditonCell")
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "hourlyCell")
-        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -251,7 +256,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 9
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -279,12 +284,25 @@ extension ViewController: UITableViewDataSource {
             
             return cell2
         }
-        if indexPath.item == 9{
-            let cell3 = hourlyWeatherCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "hourlyCell")
-           // cell3.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-            return cell3
-        }
+        
         return UITableViewCell()
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = hourlyWeatherCollectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherCell", for: indexPath) as! hourlyWeatherCell
+        var data = HourlyWeather()
+        data.currentTemp = "2°"
+        data.time = "12 PM"
+        data.weatherCondition = WeatherCondition.cloudy
+        cell.configData(data: data)
+        return cell
+    }
+    
+    
 }
 

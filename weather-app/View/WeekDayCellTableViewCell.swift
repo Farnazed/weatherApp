@@ -34,6 +34,7 @@ class WeekDayCellTableViewCell: UITableViewCell {
         weatherConditionImg.frame = CGRect()
         addSubview(weatherConditionImg)
         weatherConditionImg.translatesAutoresizingMaskIntoConstraints = false
+        
         highTemp = UILabel()
         configlabels(labelf: highTemp)
         addSubview(highTemp)
