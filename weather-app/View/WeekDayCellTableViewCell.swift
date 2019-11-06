@@ -34,7 +34,7 @@ class WeekDayCellTableViewCell: UITableViewCell {
         weatherConditionImg.frame = CGRect()
         addSubview(weatherConditionImg)
         weatherConditionImg.translatesAutoresizingMaskIntoConstraints = false
-        
+        weatherConditionImg.contentMode = .scaleAspectFit
         highTemp = UILabel()
         configlabels(labelf: highTemp)
         addSubview(highTemp)
@@ -87,11 +87,11 @@ class WeekDayCellTableViewCell: UITableViewCell {
     
     func configlabels(labelf : UILabel){
         self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-        labelf.font = UIFont(name: "Avenir Next", size: CGFloat(integerLiteral: 15))
+        labelf.font = UIFont(name: "AvenirNext-Bold", size: CGFloat(integerLiteral: 15))
         labelf.clipsToBounds = true
         labelf.translatesAutoresizingMaskIntoConstraints = false
         labelf.text = "test"
-        labelf.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        labelf.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 
 //    override func prepareForReuse() {

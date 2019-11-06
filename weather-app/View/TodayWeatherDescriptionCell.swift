@@ -26,11 +26,11 @@ class TodayWeatherDescriptionCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         day = UILabel()
         self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-        day.font = UIFont(name: "Avenir Next", size: CGFloat(integerLiteral: 15))
+        day.font = UIFont(name: "AvenirNext-Bold", size: CGFloat(integerLiteral: 15))
         day.clipsToBounds = true
         day.translatesAutoresizingMaskIntoConstraints = false
         day.text = "test"
-        day.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        day.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addSubview(day)
         day.translatesAutoresizingMaskIntoConstraints = false
         

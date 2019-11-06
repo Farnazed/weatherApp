@@ -13,4 +13,6 @@ struct Day {
     public var weatherCondition : WeatherCondition
     public var highTemp : String!
     public var lowTemp : String!
+    
+    
 }

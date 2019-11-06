@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Alamofire
 import MapKit
 import CoreLocation
@@ -40,16 +41,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
     
     //variables
     weak var tableView : UITableView!
-
+    var dataIsFetched : Bool = false
     var latitude  = "51.044270"
     var longtitude = "-114.062019"
     var tableIsCreated = false
     var weeklyWeather : [[String : AnyObject]]!
     var hourlyWeather : Dictionary<String, AnyObject>!
+    var hoursData : [Dictionary<String, AnyObject>]!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         hourlyWeatherCollectionView.dataSource = self
         hourlyWeatherCollectionView.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -59,8 +62,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        
-        
+        retriveWeatherHourly { (succes) in
+            if succes{
+                self.hourlyWeatherCollectionView.reloadData()
+                self.dataIsFetched = true
+            }
+            
+        }
+        print("when did i reach this")
+
         
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(showWeeklyWeather))
         upSwipe.direction = .up
@@ -175,6 +185,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         
     }
     
+    func retriveWeatherHourly(completion : @escaping CompletionHandler) {    Alamofire.request("\(URL)\(SECRET_KEY)/\(latitude),\(longtitude)?units=ca").responseJSON { (response) in
+        if response.result.error == nil {
+            print("got to retriveWeatherHourly")
+            guard let json = response.result.value as? Dictionary<String, AnyObject> else {return}
+            let hoursArray = (json["hourly"] as! Dictionary<String, AnyObject>)
+            self.hoursData = (hoursArray["data"] as! [Dictionary<String, AnyObject>])
+            completion(true)
+        } else {
+            completion(false)
+            debugPrint(response.result.error as Any)
+            
+        }
+        
+        }
+    }
+    
     func getTodaysDate()->(String){
         let date = Date()
         let calendar = Calendar.current
@@ -214,6 +240,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         }
         return strDate
     }
+    func getTime(timestamp: String) -> String {
+        var strDate = "undefined"
+        
+        if let unixTime = Double(timestamp) {
+            let date = Date(timeIntervalSince1970: unixTime)
+            let dateFormatter = DateFormatter()
+            let timezone = TimeZone.current.abbreviation() ?? "CET"  // get current TimeZone abbreviation or set to CET
+            dateFormatter.timeZone = TimeZone(abbreviation: timezone) //Set timezone that you want
+            dateFormatter.locale = NSLocale.current
+            dateFormatter.dateFormat = "h:mm a" // HH:mm  Specify your format that you want
+            strDate = dateFormatter.string(from: date)
+        }
+        return strDate
+    }
+    
     // returns an integer from 1 - 7, with 1 being Sunday and 7 being Saturday
     func getDayOfWeek(_ today:String) -> String? {
         let formatter  = DateFormatter()
@@ -290,17 +331,30 @@ extension ViewController: UITableViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
         return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = hourlyWeatherCollectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherCell", for: indexPath) as! hourlyWeatherCell
-        var data = HourlyWeather()
-        data.currentTemp = "2°"
-        data.time = "12 PM"
-        data.weatherCondition = WeatherCondition.cloudy
-        cell.configData(data: data)
-        return cell
+        
+        if dataIsFetched{
+            let cell =  hourlyWeatherCollectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherCell", for: indexPath) as! hourlyWeatherCell
+            let item = self.hoursData[indexPath.row]
+            var data = HourlyWeather()
+            data.currentTemp = String(describing: Int(round((item["temperature"] as! NSNumber).floatValue))) + "°"
+            data.time = self.getTime(timestamp: String(describing: item["time"]! ))
+            data.weatherCondition = WeatherCondition.init(rawValue: item["icon"] as! String)!
+            cell.configData(data: data)
+            return cell
+        } else {
+            let cell =  hourlyWeatherCollectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherCell", for: indexPath) as! hourlyWeatherCell
+            var data = HourlyWeather()
+            data.currentTemp = ""
+            data.time = ""
+            data.weatherCondition = WeatherCondition.cloudy
+            cell.configData(data: data)
+            return cell
+        }
     }
     
     

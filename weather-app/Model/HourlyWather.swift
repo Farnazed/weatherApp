@@ -8,7 +8,10 @@
 
 import Foundation
 struct HourlyWeather {
-    public var time : String!
-    public var weatherCondition : WeatherCondition!
-    public var currentTemp : String!
+    public  var time : String!
+    public  var weatherCondition : WeatherCondition!
+    public  var currentTemp : String!
+    
+    
+   
 }
