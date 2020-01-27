@@ -36,6 +36,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
     @IBOutlet weak var hightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var hourlyWeatherCollectionView: UICollectionView!
+    
+    
+    
     // TODO put the week data
     // let week : [Int:[String]] = []
     
@@ -84,7 +87,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         
     }
     
-    
+    @IBAction func privacyBtnWasPressed(_ sender: Any) {
+        print("privacy button was pressed")
+        performSegue(withIdentifier: "PrivacyPolicies", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PrivacyPolicies"{
+            print("getting ready for segue")
+            let xibvc = PrivacyPoliciesVC()
+          
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

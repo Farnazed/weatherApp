@@ -23,6 +23,12 @@
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.94999999999999996" height="1"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calgary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOR-3v-meF">
+                                <rect key="frame" x="20" y="64" width="394" height="45.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="DGg-pn-Mh7">
                                 <rect key="frame" x="30" y="575.5" width="354" height="121.5"/>
                                 <subviews>
@@ -210,13 +216,10 @@
                                 <state key="normal" title="privacy policies">
                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="privacyBtnWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cPQ-Nz-zku"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calgary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOR-3v-meF">
-                                <rect key="frame" x="20" y="64" width="394" height="45.5"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="33"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -263,11 +266,58 @@
                         <outlet property="uvIndexLblText" destination="Fn8-Xg-1GC" id="FPp-aZ-1E8"/>
                         <outlet property="weakWeatherView" destination="u4o-WP-rFy" id="dyH-Ol-h67"/>
                         <outlet property="windSpeedLblText" destination="w8g-UQ-Rva" id="nPw-Iq-UAs"/>
+                        <segue destination="tAI-Cp-0Qd" kind="presentation" identifier="PrivacyPolicies" id="0ZU-dc-6Yf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
+            <point key="canvasLocation" x="28" y="54"/>
+        </scene>
+        <!--Privacy PoliciesVC-->
+        <scene sceneID="2MO-zR-FX5">
+            <objects>
+                <viewController id="tAI-Cp-0Qd" customClass="PrivacyPoliciesVC" customModule="Calgary_Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vKo-ES-0G9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbD-Fl-l7Z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwf-cj-EIH">
+                                        <rect key="frame" x="20" y="20" width="374" height="788"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Fwf-cj-EIH" secondAttribute="trailing" constant="20" symbolic="YES" id="C9D-07-c7r"/>
+                                    <constraint firstItem="Fwf-cj-EIH" firstAttribute="top" secondItem="kbD-Fl-l7Z" secondAttribute="top" constant="20" symbolic="YES" id="OLO-5n-JKp"/>
+                                    <constraint firstItem="Fwf-cj-EIH" firstAttribute="leading" secondItem="kbD-Fl-l7Z" secondAttribute="leading" constant="20" symbolic="YES" id="Qi8-Ru-mvl"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fwf-cj-EIH" secondAttribute="bottom" id="X37-dx-ybW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Xce-IW-LvQ" firstAttribute="bottom" secondItem="kbD-Fl-l7Z" secondAttribute="bottom" id="2jj-h6-fA0"/>
+                            <constraint firstItem="kbD-Fl-l7Z" firstAttribute="top" secondItem="Xce-IW-LvQ" secondAttribute="top" id="6hH-bZ-g5G"/>
+                            <constraint firstItem="kbD-Fl-l7Z" firstAttribute="leading" secondItem="Xce-IW-LvQ" secondAttribute="leading" id="JQj-f2-8FZ"/>
+                            <constraint firstItem="Xce-IW-LvQ" firstAttribute="trailing" secondItem="kbD-Fl-l7Z" secondAttribute="trailing" id="hs8-Pv-HaB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Xce-IW-LvQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="Fwf-cj-EIH" id="bjA-7c-3Ok"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ce2-Or-hci" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024" y="106"/>
         </scene>
     </scenes>
     <resources>
