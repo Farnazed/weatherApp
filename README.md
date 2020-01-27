@@ -1,4 +1,4 @@
-# weatherApp
+# Calgary weather App
 This App shows Calgary's weather.
 
 Here you can see the Privacy Policies: 
