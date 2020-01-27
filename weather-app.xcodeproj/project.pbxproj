@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F54DD739237249980099A55C /* WeatherServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DD738237249980099A55C /* WeatherServices.swift */; };
+		F582EFC623DF68B100D7ACFB /* privacy_policy.md in Resources */ = {isa = PBXBuildFile; fileRef = F582EFC523DF68B100D7ACFB /* privacy_policy.md */; };
 		F585B532236B78350078F38C /* HourlyWather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F585B531236B78340078F38C /* HourlyWather.swift */; };
 		F585B536236E941C0078F38C /* hourlyWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F585B535236E941C0078F38C /* hourlyWeatherCell.swift */; };
 		F5A2CF74236223BB0062FD82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A2CF73236223BB0062FD82 /* AppDelegate.swift */; };
@@ -31,9 +32,10 @@
 		C7D2A6D83197764F9D7D81F0 /* Pods-weather-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather-app.debug.xcconfig"; path = "Target Support Files/Pods-weather-app/Pods-weather-app.debug.xcconfig"; sourceTree = "<group>"; };
 		CC28163C1AAF71D78E7458D3 /* Pods-weather-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather-app.release.xcconfig"; path = "Target Support Files/Pods-weather-app/Pods-weather-app.release.xcconfig"; sourceTree = "<group>"; };
 		F54DD738237249980099A55C /* WeatherServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServices.swift; sourceTree = "<group>"; };
+		F582EFC523DF68B100D7ACFB /* privacy_policy.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = privacy_policy.md; sourceTree = "<group>"; };
 		F585B531236B78340078F38C /* HourlyWather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWather.swift; sourceTree = "<group>"; };
 		F585B535236E941C0078F38C /* hourlyWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hourlyWeatherCell.swift; sourceTree = "<group>"; };
-		F5A2CF70236223BB0062FD82 /* weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A2CF70236223BB0062FD82 /* Calgary Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calgary Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A2CF73236223BB0062FD82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5A2CF75236223BB0062FD82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F5A2CF77236223BB0062FD82 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,13 +96,14 @@
 				F5A2CF71236223BB0062FD82 /* Products */,
 				234FE7D4897870D24CB1E9BC /* Pods */,
 				6052DC67F5E101849F83ED43 /* Frameworks */,
+				F582EFC523DF68B100D7ACFB /* privacy_policy.md */,
 			);
 			sourceTree = "<group>";
 		};
 		F5A2CF71236223BB0062FD82 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F5A2CF70236223BB0062FD82 /* weather-app.app */,
+				F5A2CF70236223BB0062FD82 /* Calgary Weather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,7 +114,6 @@
 				F54DD737237249780099A55C /* Services */,
 				F5BC9A4723640C6C00E820D5 /* View */,
 				F5CE6F6923640AED00200AE7 /* Model */,
-				F5A2CF8B236226CB0062FD82 /* API */,
 				F5A2CF882362249A0062FD82 /* constant */,
 				F5A2CF87236223C70062FD82 /* Controller */,
 				F5A2CF73236223BB0062FD82 /* AppDelegate.swift */,
@@ -139,13 +141,6 @@
 				F5A2CF89236224B10062FD82 /* constants.swift */,
 			);
 			path = constant;
-			sourceTree = "<group>";
-		};
-		F5A2CF8B236226CB0062FD82 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		F5BC9A4723640C6C00E820D5 /* View */ = {
@@ -188,7 +183,7 @@
 			);
 			name = "weather-app";
 			productName = "weather-app";
-			productReference = F5A2CF70236223BB0062FD82 /* weather-app.app */;
+			productReference = F5A2CF70236223BB0062FD82 /* Calgary Weather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -231,6 +226,7 @@
 			files = (
 				F5A2CF80236223C00062FD82 /* LaunchScreen.storyboard in Resources */,
 				F5A2CF7D236223BF0062FD82 /* Assets.xcassets in Resources */,
+				F582EFC623DF68B100D7ACFB /* privacy_policy.md in Resources */,
 				F5A2CF7B236223BB0062FD82 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,15 +437,18 @@
 			baseConfigurationReference = C7D2A6D83197764F9D7D81F0 /* Pods-weather-app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6YA5AZ26AN;
+				DEVELOPMENT_TEAM = FBTX9G6X4M;
 				INFOPLIST_FILE = "weather-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "farnaz.e.daneshvar-gmail.com.weather-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "edfarnaz-gmail.com.weather-app";
+				PRODUCT_NAME = "Calgary Weather";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -461,14 +460,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6YA5AZ26AN;
+				DEVELOPMENT_TEAM = FBTX9G6X4M;
 				INFOPLIST_FILE = "weather-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "farnaz.e.daneshvar-gmail.com.weather-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "edfarnaz-gmail.com.weather-app";
+				PRODUCT_NAME = "Calgary Weather";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

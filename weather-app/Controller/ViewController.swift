@@ -69,7 +69,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
             }
             
         }
-        print("when did i reach this")
+        
 
         
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(showWeeklyWeather))
@@ -225,6 +225,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
             return ""
         }
     }
+    
     func createDateTime(timestamp: String) -> String {
         var strDate = "undefined"
         
@@ -240,6 +241,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate,  UITableViewD
         }
         return strDate
     }
+    
     func getTime(timestamp: String) -> String {
         var strDate = "undefined"
         
